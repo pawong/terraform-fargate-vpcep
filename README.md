@@ -1,2 +1,3 @@
 # terraform-fargate-vpcep
-Terraform|Fargate|VPC-Endpoints
+
+Terraform | Fargate | VPC-Endpoints
