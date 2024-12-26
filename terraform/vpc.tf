@@ -9,7 +9,7 @@ resource "aws_vpc" "main_vpc" {
 }
 
 resource "aws_security_group" "vpcep_sg" {
-  name        = "vpcep-${var.project_name}-sg"
+  name        = "${var.project_name}-vpcep-sg"
   description = "Security group for ${var.project_name}"
   vpc_id      = aws_vpc.main_vpc.id
 

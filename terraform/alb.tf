@@ -1,4 +1,4 @@
-resource "aws_security_group" "lb_sg" {
+resource "aws_security_group" "alb_sg" {
   name        = "alb-${var.project_name}-sg"
   description = "Security group for ${var.project_name}"
   vpc_id      = aws_vpc.main_vpc.id
@@ -23,7 +23,7 @@ resource "aws_lb" "lb" {
   name               = "${var.project_name}-lb"
   load_balancer_type = "application"
   internal           = true
-  security_groups    = [aws_security_group.lb_sg.id]
+  security_groups    = [aws_security_group.alb_sg.id]
   subnets            = [for subnet in aws_subnet.private : subnet.id]
 }
 

@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs_sg" {
-  name        = "ecs-${var.project_name}-sg"
+  name        = "${var.project_name}-ecs-sg"
   description = "Security group for ${var.project_name}"
   vpc_id      = aws_vpc.main_vpc.id
 
@@ -24,19 +24,7 @@ resource "aws_security_group" "ecs_sg" {
     protocol        = "tcp"
     prefix_list_ids = [aws_vpc_endpoint.s3.prefix_list_id]
   }
-
-  # egress {
-  #   from_port   = 443
-  #   to_port     = 443
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
 }
-
-# resource "aws_vpc_endpoint_security_group_association" "ecs_sg_s3" {
-#   vpc_endpoint_id   = aws_vpc_endpoint.s3.id
-#   security_group_id = aws_security_group.ecs_sg.id
-# }
 
 resource "aws_iam_policy" "task_execution" {
   name        = "${var.project_name}-task"
