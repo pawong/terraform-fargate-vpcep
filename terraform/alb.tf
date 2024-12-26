@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb_sg" {
-  name        = "alb-${var.project_name}-sg"
+  name        = "${var.project_name}-alb-sg"
   description = "Security group for ${var.project_name}"
   vpc_id      = aws_vpc.main_vpc.id
   ingress {
@@ -19,8 +19,8 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-resource "aws_lb" "lb" {
-  name               = "${var.project_name}-lb"
+resource "aws_lb" "alb" {
+  name               = "${var.project_name}-alb"
   load_balancer_type = "application"
   internal           = true
   security_groups    = [aws_security_group.alb_sg.id]
@@ -47,7 +47,7 @@ resource "aws_lb_target_group" "default" {
 }
 
 resource "aws_lb_listener" "default" {
-  load_balancer_arn = aws_lb.lb.arn
+  load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
 
